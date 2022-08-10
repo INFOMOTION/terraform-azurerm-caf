@@ -1,7 +1,15 @@
+locals {
+
+  prefixes = lookup(var.settings, "useprefix", false) ? try(var.global_settings.prefix-aad-apps, var.global_settings.prefixes) : []
+  
+  display_name = format("%s%s",try(format("%s-", local.prefixes.0), ""), var.settings.application_name)
+}
+
+
+
 resource "azuread_application" "app" {
 
-  display_name = var.global_settings.passthrough || try(var.settings.global_settings.passthrough, false) ? var.settings.application_name : format("%v%s", try(format("%s-", var.global_settings.prefixes[0]), ""), var.settings.application_name)
-
+  display_name = local.display_name
 
   owners = coalescelist(
     try(var.settings.owners, []),

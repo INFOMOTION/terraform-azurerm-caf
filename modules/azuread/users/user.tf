@@ -1,6 +1,6 @@
 locals {
   global_settings = {
-    prefixes      = lookup(var.settings, "useprefix", null) == true ? try(var.settings.global_settings.prefixes, var.global_settings.prefixes) : []
+    prefixes      = lookup(var.settings, "useprefix", false) ? try(var.global_settings ,var.settings.global_settings.prefixes, var.global_settings.prefixes) : []
     random_length = try(var.settings.global_settings.random_length, var.global_settings.random_length)
     passthrough   = try(var.settings.global_settings.passthrough, var.global_settings.passthrough)
     use_slug      = try(var.settings.global_settings.use_slug, var.global_settings.use_slug)
