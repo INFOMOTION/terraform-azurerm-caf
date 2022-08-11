@@ -24,6 +24,7 @@ module "example" {
   role_mapping                          = var.role_mapping
   storage_accounts                      = var.storage_accounts
   subscription_billing_role_assignments = var.subscription_billing_role_assignments
+  resource_provider_registration        = var.resource_provider_registration
   tags                                  = local.tags
 
   azuread = {
@@ -295,6 +296,7 @@ module "example" {
     app_service_plans            = var.app_service_plans
     app_services                 = var.app_services
     function_apps                = var.function_apps
+    static_sites                 = var.static_sites
   }
   data_factory = {
     data_factory                                 = var.data_factory
