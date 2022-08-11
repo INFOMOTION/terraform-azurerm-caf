@@ -8,13 +8,7 @@ resource "azuread_group" "group" {
   display_name            = local.display_name
   description             = lookup(var.azuread_groups, "description", null)
   prevent_duplicate_names = lookup(var.azuread_groups, "prevent_duplicate_names", null)
-  owners = coalescelist(
-    try(tolist(var.azuread_groups.owners), []),
-    try(tolist(var.azuread_groups.owners.object_ids), []),
-    [
-      var.client_config.object_id
-    ]
-  )
+  owners = local.owners
 }
 
 locals {
