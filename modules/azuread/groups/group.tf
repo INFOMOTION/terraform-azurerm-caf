@@ -1,9 +1,3 @@
-locals {
-  prefixes = lookup(var.azuread_groups, "useprefix", false) ? try(var.global_settings.prefix-aad-groups, var.global_settings.prefixes) : []
-  
-  display_name = format("%s%s",try(format("%s-", local.prefixes.0), ""), var.azuread_groups.name)
-}
-
 resource "azuread_group" "group" {
   display_name            = local.display_name
   description             = lookup(var.azuread_groups, "description", null)
@@ -11,7 +5,17 @@ resource "azuread_group" "group" {
   owners = local.owners
 }
 
+
+data "azuread_user" "main" {
+  for_each = try(toset(var.azuread_groups.owners.user_principal_names), {})
+  user_principal_name = each.value
+}
+
 locals {
+  prefixes = lookup(var.azuread_groups, "useprefix", false) ? try(var.global_settings.prefix-aad-groups, var.global_settings.prefixes) : []
+  
+  display_name = format("%s%s",try(format("%s-", local.prefixes.0), ""), var.azuread_groups.name)
+
   owners = concat(
     try(tolist(var.azuread_groups.owners), []),
     try(tolist(var.azuread_groups.owners.object_ids), []),
