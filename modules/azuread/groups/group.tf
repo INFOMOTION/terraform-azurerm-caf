@@ -10,6 +10,7 @@ resource "azuread_group" "group" {
   prevent_duplicate_names = lookup(var.azuread_groups, "prevent_duplicate_names", null)
   owners = coalescelist(
     try(tolist(var.azuread_groups.owners), []),
+    try(tolist(var.azuread_groups.owners.object_ids), []),
     [
       var.client_config.object_id
     ]
