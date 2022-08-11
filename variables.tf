@@ -413,6 +413,3 @@ variable "iot" {
 
   }
 }
-variable "resource_provider_registration" {
-  default = {}
-}
