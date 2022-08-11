@@ -16,3 +16,18 @@ resource "azuread_group" "group" {
     ]
   )
 }
+
+locals {
+  owners = concat(
+    try(tolist(var.azuread_groups.owners), []),
+    try(tolist(var.azuread_groups.owners.object_ids), []),
+    [
+      var.client_config.object_id
+    ],
+    local.ad_user_oids
+  )
+  ad_user_oids = [for user in try(var.azuread_groups.owners.user_principal_names, []) :
+    data.azuread_user.main[user].object_id
+  ]
+}
+
