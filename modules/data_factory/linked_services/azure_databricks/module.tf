@@ -1,4 +1,4 @@
-resource "azurecaf_name" "dflsad" {
+resource "azurecaf_name" "cafname" {
   name          = var.settings.name
   resource_type = "azurerm_data_factory_linked_service_azure_databricks"
   prefixes      = var.global_settings.prefixes
@@ -10,7 +10,7 @@ resource "azurecaf_name" "dflsad" {
 
 resource "azurerm_data_factory_linked_service_azure_databricks" "dflsad" {
 
-  name                = azurecaf_name.dflsad.result
+  name                = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
   resource_group_name = var.resource_group_name
   data_factory_id     = var.remote_objects.data_factory.id
   access_token        = try(var.settings.access_token, null)

@@ -1,4 +1,4 @@
-resource "azurecaf_name" "linked_service_cosmosdb" {
+resource "azurecaf_name" "cafname" {
   name          = var.settings.name
   resource_type = "azurerm_data_factory" #"azurerm_data_factory_dataset_azure_blob"
   prefixes      = var.global_settings.prefixes
@@ -8,7 +8,7 @@ resource "azurecaf_name" "linked_service_cosmosdb" {
   use_slug      = var.global_settings.use_slug
 }
 resource "azurerm_data_factory_linked_service_cosmosdb" "linked_service_cosmosdb" {
-  name                     = azurecaf_name.linked_service_cosmosdb.result
+  name                     = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
   resource_group_name      = var.resource_group_name
   data_factory_id          = var.data_factory_id
   description              = try(var.settings.description, null)

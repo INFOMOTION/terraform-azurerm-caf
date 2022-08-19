@@ -18,13 +18,18 @@ output "resource_group_name" {
   value       = var.resource_group_name
 }
 
+output "primary_dfs_endpoint" {
+  description = "The endpoint URL for DFS storage in the primary location."
+  value = azurerm_storage_account.stg.primary_dfs_endpoint
+}
+
 output "primary_blob_endpoint" {
   description = "The endpoint URL for blob storage in the primary location."
   value       = azurerm_storage_account.stg.primary_blob_endpoint
 }
 
 output "primary_access_key" {
-  description = "The endpoint URL for blob storage in the primary location."
+  description = "The primary access key for the Storage Account."
   value       = azurerm_storage_account.stg.primary_access_key
   sensitive   = true
 }
@@ -74,7 +79,6 @@ output "primary_connection_string" {
   value     = try(azurerm_storage_account.stg.primary_connection_string, null)
   sensitive = true
 }
-
 
 output "primary_blob_connection_string" {
   value     = try(azurerm_storage_account.stg.primary_blob_connection_string, null)

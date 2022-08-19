@@ -1,4 +1,4 @@
-resource "azurecaf_name" "linked" {
+resource "azurecaf_name" "cafname" {
   name          = var.settings.name
   resource_type = "azurerm_data_factory_linked_service_sql_server"
   prefixes      = var.global_settings.prefixes
@@ -8,7 +8,7 @@ resource "azurecaf_name" "linked" {
   use_slug      = var.global_settings.use_slug
 }
 resource "azurerm_data_factory_linked_service_sql_server" "linked_service_sql_server" {
-  name                     = azurecaf_name.linked.name
+  name                     = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
   resource_group_name      = var.resource_group_name
   data_factory_id          = var.data_factory_id
   description              = try(var.settings.description, null)

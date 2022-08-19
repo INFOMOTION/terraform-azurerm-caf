@@ -1,4 +1,4 @@
-resource "azurecaf_name" "dataset" {
+resource "azurecaf_name" "cafname" {
   name          = var.settings.name
   resource_type = "azurerm_data_factory_linked_service_azure_file_storage"
   prefixes      = var.global_settings.prefixes
@@ -9,7 +9,7 @@ resource "azurecaf_name" "dataset" {
 }
 
 resource "azurerm_data_factory_linked_service_azure_file_storage" "linked_service_azure_file_storage" {
-  name                     = azurecaf_name.dataset.name
+  name                     = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
   resource_group_name      = var.resource_group_name
   data_factory_id          = var.data_factory_id
   description              = try(var.description, null)
