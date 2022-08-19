@@ -365,10 +365,11 @@ locals {
   }
 
   storage = {
-    netapp_accounts        = try(var.storage.netapp_accounts, {})
-    storage_account_blobs  = try(var.storage.storage_account_blobs, {})
-    storage_account_queues = try(var.storage.storage_account_queues, {})
-    storage_containers     = try(var.storage.storage_containers, {})
+    netapp_accounts               = try(var.storage.netapp_accounts, {})
+    storage_account_blobs         = try(var.storage.storage_account_blobs, {})
+    storage_account_queues        = try(var.storage.storage_account_queues, {})
+    storage_containers            = try(var.storage.storage_containers, {})
+    storage_data_lake_filesystems = try(var.storage.storage_data_lake_filesystems, {})
   }
 
   webapp = {

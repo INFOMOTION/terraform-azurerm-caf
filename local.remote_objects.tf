@@ -107,6 +107,7 @@ locals {
     signalr_services                             = try(local.combined_objects_signalr_services, null)
     storage_accounts                             = try(local.combined_objects_storage_accounts, null)
     storage_containers                           = try(local.combined_objects_storage_containers, null)
+    storage_data_lake_filesystems                = try(local.combined_objects_storage_data_lake_filesystems, null)
     synapse_workspaces                           = try(local.combined_objects_synapse_workspaces, null)
     traffic_manager_profile                      = try(local.combined_objects_traffic_manager_profile, null)
     traffic_manager_nested_endpoint              = try(local.combined_objects_traffic_manager_nested_endpoint, null)

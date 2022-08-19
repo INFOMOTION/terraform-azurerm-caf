@@ -104,6 +104,7 @@ locals {
     resource_groups                            = local.combined_objects_resource_groups
     storage_accounts                           = local.combined_objects_storage_accounts
     storage_containers                         = local.combined_objects_storage_containers
+    data_lake_filesystems                      = local.combined_objects_storage_data_lake_filesystems
     subscriptions                              = local.combined_objects_subscriptions
     synapse_workspaces                         = local.combined_objects_synapse_workspaces
     virtual_subnets                            = local.combined_objects_virtual_subnets
