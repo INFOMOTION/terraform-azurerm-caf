@@ -6,7 +6,7 @@ output "id" {
 #  value       = azurerm_function_app.function_app.default_site_hostname
 #  description = "The Default Hostname associated with the App Service"
 #}
-output default_hostname {
+output "default_hostname" {
  value       = azurerm_function_app.function_app.default_hostname
  description = "The default hostname associated with the Function App."
 }

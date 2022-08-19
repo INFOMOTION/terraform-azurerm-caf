@@ -9,11 +9,11 @@ resource "azurecaf_name" "cafname" {
 }
 
 resource "azurerm_data_factory_linked_service_key_vault" "linked_service_key_vault" {
-  name                     = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
-  resource_group_name      = var.resource_group_name
-  data_factory_id          = var.data_factory_id
-  key_vault_id             = var.key_vault_id
-  
+  name                = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
+  resource_group_name = var.resource_group_name
+  data_factory_id     = var.data_factory_id
+  key_vault_id        = var.key_vault_id
+
   description              = try(var.settings.description, null)
   integration_runtime_name = try(var.settings.integration_runtime_name, var.integration_runtime_name)
   annotations              = try(var.settings.annotations, null)

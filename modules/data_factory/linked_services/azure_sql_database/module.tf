@@ -9,9 +9,9 @@ resource "azurecaf_name" "cafname" {
 }
 
 resource "azurerm_data_factory_linked_service_azure_sql_database" "linked_service_azure_sql_database" {
-  name                     = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
-  resource_group_name      = var.resource_group_name
-  data_factory_id          = var.data_factory_id
+  name                = try(var.settings.useprefix, true) == true ? azurecaf_name.cafname.result : var.settings.name
+  resource_group_name = var.resource_group_name
+  data_factory_id     = var.data_factory_id
   # Use Connection String only if not empty and if no keyvault connection string is provided.
   connection_string        = try(var.key_vault_connection_string.linked_service_name, null) != null && try(var.key_vault_connection_string.secret_name, null) != null ? null : try(var.connection_string, null)
   use_managed_identity     = try(var.settings.use_managed_identity, null)
@@ -26,14 +26,14 @@ resource "azurerm_data_factory_linked_service_azure_sql_database" "linked_servic
 
   dynamic "key_vault_connection_string" {
     for_each = try(var.key_vault_connection_string.linked_service_name, null) != null && try(var.key_vault_connection_string.secret_name, null) != null ? [var.key_vault_connection_string] : []
-   
+
     content {
       linked_service_name = key_vault_connection_string.value.linked_service_name
       secret_name         = key_vault_connection_string.value.secret_name
     }
   }
   dynamic "key_vault_password" {
-    for_each = try(var.key_vault_password.linked_service_name,null) != null && try(var.key_vault_password.secret_name, null) != null ? [var.key_vault_password] : []
+    for_each = try(var.key_vault_password.linked_service_name, null) != null && try(var.key_vault_password.secret_name, null) != null ? [var.key_vault_password] : []
 
     content {
       linked_service_name = key_vault_password.value.linked_service_name
