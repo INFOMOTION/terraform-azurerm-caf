@@ -25,11 +25,26 @@ storage_accounts = {
 }
 
 
-storage_data_lake_filesystems = {
+data_lake_filesystems = {
   fs1 = {
     name = "myfilesystem"
     storage_account_key = "sa1"
     properties = {
+    }
+  }
+}
+
+# Configuration of Filesystems seperatly from Storage Accounts enables RBAC-Assignments 
+role_mapping = {
+  built_in_role_mapping = {
+    data_lake_filesystems = {
+      default = {
+        "Storage Blob Data Owner" = {
+          data_factory = {
+            keys = ["default"]
+          }
+        } 
+      }
     }
   }
 }

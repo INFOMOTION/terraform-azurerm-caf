@@ -369,7 +369,7 @@ locals {
     storage_account_blobs         = try(var.storage.storage_account_blobs, {})
     storage_account_queues        = try(var.storage.storage_account_queues, {})
     storage_containers            = try(var.storage.storage_containers, {})
-    storage_data_lake_filesystems = try(var.storage.storage_data_lake_filesystems, {})
+    data_lake_filesystems         = try(var.storage.data_lake_filesystems, {})
   }
 
   webapp = {

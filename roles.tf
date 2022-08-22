@@ -77,6 +77,7 @@ locals {
     backup_vaults                              = local.combined_objects_backup_vaults
     batch_accounts                             = local.combined_objects_batch_accounts
     data_factory                               = local.combined_objects_data_factory
+    data_lake_filesystems                      = local.combined_objects_data_lake_filesystems
     databricks_workspaces                      = local.combined_objects_databricks_workspaces
     dns_zones                                  = local.combined_objects_dns_zones
     event_hub_namespaces                       = local.combined_objects_event_hub_namespaces
@@ -104,7 +105,6 @@ locals {
     resource_groups                            = local.combined_objects_resource_groups
     storage_accounts                           = local.combined_objects_storage_accounts
     storage_containers                         = local.combined_objects_storage_containers
-    data_lake_filesystems                      = local.combined_objects_storage_data_lake_filesystems
     subscriptions                              = local.combined_objects_subscriptions
     synapse_workspaces                         = local.combined_objects_synapse_workspaces
     virtual_subnets                            = local.combined_objects_virtual_subnets
