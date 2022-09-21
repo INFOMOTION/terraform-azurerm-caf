@@ -17,7 +17,7 @@ output "workspace_url" {
 }
 output "workspace_url_https" {
   description = "The workspace URL which is of the format 'https://adb-{workspaceId}.{random}.azuredatabricks.net'"
-  value       = format("%s/%s","https://", "${azurerm_databricks_workspace.ws.workspace_url}")
+  value       = format("%s%s","https://", "${azurerm_databricks_workspace.ws.workspace_url}")
 
 }
 
