@@ -12,7 +12,10 @@ resource "azurecaf_name" "plan" {
 resource "azurerm_function_app" "function_app" {
   #To avoid redeploy with existing customer
   lifecycle {
-    ignore_changes = [name]
+    ignore_changes = [
+      name,
+      app_settings["WEBSITE_RUN_FROM_PACKAGE"]
+    ]
   }
   name                = azurecaf_name.plan.result
   location            = var.location
