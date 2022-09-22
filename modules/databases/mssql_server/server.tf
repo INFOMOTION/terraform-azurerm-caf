@@ -67,7 +67,7 @@ resource "random_password" "sql_admin" {
   special          = true
   upper            = true
   numeric          = true
-  override_special = "$#%"
+  override_special = "!?"
 }
 
 # Store the generated password into keyvault
