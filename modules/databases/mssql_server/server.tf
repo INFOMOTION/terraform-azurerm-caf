@@ -63,7 +63,7 @@ resource "azurecaf_name" "mssql" {
 resource "random_password" "sql_admin" {
   count = try(var.settings.administrator_login_password, null) == null ? 1 : 0
 
-  length           = 128
+  length           = 64
   special          = true
   upper            = true
   numeric          = true
