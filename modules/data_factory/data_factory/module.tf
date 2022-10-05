@@ -57,5 +57,11 @@ resource "azurerm_data_factory" "df" {
   public_network_enabled          = try(var.settings.public_network_enabled, null)
   #customer_managed_key_id         = try(var.settings.customer_managed_key_id)
   tags = local.tags
+
+  lifecycle {
+    ignore_changes = [
+      global_parameter
+    ]
+  }
 }
 
