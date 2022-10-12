@@ -27,6 +27,10 @@ data "azurerm_function_app_host_keys" "keys" {
   ]
 }
 
+output "principal_id" {
+  value = azurerm_function_app.function_app.identity.0.principal_id
+}
+
 output "default_function_key" {
   value = data.azurerm_function_app_host_keys.keys.default_function_key
   sensitive = true

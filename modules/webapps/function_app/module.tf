@@ -14,7 +14,8 @@ resource "azurerm_function_app" "function_app" {
   lifecycle {
     ignore_changes = [
       name,
-      app_settings["WEBSITE_RUN_FROM_PACKAGE"]
+      app_settings,
+      tags
     ]
   }
   name                = azurecaf_name.plan.result
