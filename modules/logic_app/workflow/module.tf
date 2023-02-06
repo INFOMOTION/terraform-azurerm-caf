@@ -19,6 +19,13 @@ resource "azurerm_logic_app_workflow" "la" {
   workflow_version                   = try(var.settings.workflow_version, null)
   parameters                         = try(var.settings.parameters, null)
   tags                               = local.tags
+
+  lifecycle {
+    ignore_changes = [
+      parameters,
+      workflow_parameters
+    ]
+  }
 }
 
 
