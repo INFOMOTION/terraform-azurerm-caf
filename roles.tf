@@ -20,7 +20,7 @@ resource "azurerm_role_assignment" "for" {
   principal_id         = each.value.object_id_resource_type == "object_ids" ? each.value.object_id_key_resource : each.value.object_id_lz_key == null ? local.services_roles[each.value.object_id_resource_type][var.current_landingzone_key][each.value.object_id_key_resource].rbac_id : local.services_roles[each.value.object_id_resource_type][each.value.object_id_lz_key][each.value.object_id_key_resource].rbac_id
   role_definition_id   = each.value.mode == "custom_role_mapping" ? module.custom_roles[each.value.role_definition_name].role_definition_resource_id : null
   role_definition_name = each.value.mode == "built_in_role_mapping" ? each.value.role_definition_name : null
-  scope                = each.value.scope_lz_key == null ? local.services_roles[each.value.scope_resource_key][var.current_landingzone_key][each.value.scope_key_resource].id : local.services_roles[each.value.scope_resource_key][each.value.scope_lz_key][each.value.scope_key_resource].id
+  scope                = each.value.scope_lz_key == null ? local.services_roles[each.value.scope_resource_key][var.current_landingzone_key][each.value.scope_key_resource].id : local.services_roles[each.value.scope_resource_key][each.value.scope_lz_key][coalesce(each.value.remote_key, each.value.scope_key_resource)].id
 }
 
 data "azurerm_management_group" "level" {
@@ -164,13 +164,14 @@ locals {
                     scope_resource_key      = key
                     scope_lz_key            = try(role_mapping.lz_key, null)
                     scope_key_resource      = scope_key_resource
+                    remote_key              = try(role_mapping.remote_key, null)
                     role_definition_name    = role_definition_name
                     object_id_resource_type = object_id_key
                     object_id_key_resource  = object_id_key_resource #   "object_id_key_resource" = "aks_admins"
                     object_id_lz_key        = try(object_resources.lz_key, null)
                   }
                 ]
-              ] if role_definition_name != "lz_key"
+              ] if role_definition_name != "lz_key" && role_definition_name != "remote_key"
             ]
           ]
         ]
