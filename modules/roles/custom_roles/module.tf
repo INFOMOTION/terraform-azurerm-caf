@@ -11,8 +11,7 @@ resource "azurecaf_name" "custom_role" {
 }
 
 resource "azurerm_role_definition" "custom_role" {
-  name = azurecaf_name.custom_role.result
-
+  name = try(var.custom_role.useprefix, true) == true ? azurecaf_name.custom_role.result : var.custom_role.name
   # TODO: refactor scope to include other scopes like RG, resources.
   scope       = lookup(var.custom_role, "scope", var.subscription_primary)
   description = var.custom_role.description
