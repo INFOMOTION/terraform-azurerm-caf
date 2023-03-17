@@ -17,8 +17,8 @@ resource "azurecaf_name" "keyvault" {
 resource "azurerm_key_vault" "keyvault" {
 
   name                            = azurecaf_name.keyvault.result
-  location                        = local.location
-  resource_group_name             = local.resource_group_name
+  location                        = var.location
+  resource_group_name             = var.resource_group_name
   tenant_id                       = var.client_config.tenant_id
   sku_name                        = try(var.settings.sku_name, "standard")
   tags                            = try(merge(var.base_tags, local.tags), {})
@@ -58,7 +58,7 @@ resource "azurerm_key_vault" "keyvault" {
 
   lifecycle {
     ignore_changes = [
-      resource_group_name, location
+      #resource_group_name, location
     ]
   }
 }

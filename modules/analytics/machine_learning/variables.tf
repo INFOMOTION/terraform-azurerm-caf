@@ -21,8 +21,12 @@ variable "global_settings" {
   description = "Global settings object (see module README.md)"
 }
 
-variable "resource_groups" {
-  description = "(Required) The resource group objects where to create the resource."
+variable "resource_group_name" {
+  description = "The resource group object where to create the resource."
+}
+
+variable "location" {
+  description = "The location where to create the resource."
 }
 
 variable "keyvault_id" {

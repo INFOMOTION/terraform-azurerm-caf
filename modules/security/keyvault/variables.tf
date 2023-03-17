@@ -4,7 +4,15 @@ variable "global_settings" {
 variable "client_config" {
   description = "Client configuration object (see module README.md)."
 }
-variable "resource_groups" {}
+
+variable "resource_group_name" {
+  description = "The resource group object where to create the resource."
+}
+
+variable "location" {
+  description = "The location where to create the resource."
+}
+
 variable "settings" {}
 variable "vnets" {
   default = {}

@@ -14,8 +14,8 @@ resource "azurecaf_name" "ws" {
 
 resource "azurerm_machine_learning_workspace" "ws" {
   name                    = azurecaf_name.ws.result
-  location                = local.location
-  resource_group_name     = local.resource_group_name
+  location                = var.location
+  resource_group_name     = var.resource_group_name
   application_insights_id = var.application_insights_id
   key_vault_id            = var.keyvault_id
   storage_account_id      = var.storage_account_id
