@@ -77,6 +77,7 @@ locals {
     azurerm_firewalls                          = local.combined_objects_azurerm_firewalls
     backup_vaults                              = local.combined_objects_backup_vaults
     batch_accounts                             = local.combined_objects_batch_accounts
+    cognitive_services_account                 = local.combined_objects_cognitive_services_accounts
     data_factory                               = local.combined_objects_data_factory
     data_lake_filesystems                      = local.combined_objects_data_lake_filesystems
     databricks_workspaces                      = local.combined_objects_databricks_workspaces
