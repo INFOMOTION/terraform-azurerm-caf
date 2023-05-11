@@ -87,6 +87,7 @@ locals {
     keyvaults                                  = local.combined_objects_keyvaults
     kusto_clusters                             = local.combined_objects_kusto_clusters
     logged_in                                  = local.logged_in
+    logic_app_standard  	                     = local.combined_objects_logic_app_standard
     machine_learning_compute_instance          = module.machine_learning_compute_instance
     machine_learning_workspaces                = local.combined_objects_machine_learning
     managed_identities                         = local.combined_objects_managed_identities
