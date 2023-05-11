@@ -20,10 +20,10 @@ resource "azurerm_logic_app_standard" "logic_app_standard" {
   version      = try(var.settings.version, null)
 
   dynamic "identity" {
-    for_each = can(var.settings.identity) ? [var.settings.identity] : []
+    for_each = can(var.identity) ? [var.identity] : []
     content {
       type         = identity.value.type
-      identity_ids = concat(local.managed_identities, try(identity.value.identity_ids, []))
+      #identity_ids = concat(local.managed_identities, try(identity.value.identity_ids, []))
     }
   }
 

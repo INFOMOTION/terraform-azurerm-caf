@@ -9,6 +9,6 @@ output "name" {
 }
 
 output "rbac_id" {
-  value       = try(azurerm_logic_app_standard.logic_app_standard.identity.0.principal_id, null)
+  value       = try(azurerm_logic_app_standard.logic_app_standard.identity[0].principal_id, null)
   description = "The Principal ID of the App Service."
 }
